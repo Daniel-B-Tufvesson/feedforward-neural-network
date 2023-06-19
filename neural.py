@@ -75,3 +75,14 @@ class BaseNeuralNetwork(ABC):
     def train(self, x_values: list[Vector], y_values: list[Vector],
               learning_rate: float = 0.1, epochs: int = 5) -> None:
         pass
+
+
+def argmax(values: list[float]) -> int:
+    highest = values[0]
+    highest_index = 0
+    for i, value in enumerate(values):
+        if value > highest:
+            highest = value
+            highest_index = i
+
+    return highest_index
