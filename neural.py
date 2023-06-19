@@ -8,21 +8,40 @@ from abc import ABC, abstractmethod
 
 Vector = list[float]
 
+# Activation function names.
 SIGMOID_NAME = 'sigmoid'
 RELU_NAME = 'relu'
 
 
 class Activation(ABC):
+    """
+    An abstract base class for the activation function and its derivative.
+    """
 
     def __init__(self, name: str):
+        """
+        :param name: the name of this activation.
+        """
         self.name = name
 
     @abstractmethod
     def compute(self, x: float) -> float:
+        """
+        Compute the activation function given the value x.
+
+        :param x: the value to compute the activation for.
+        :return: the activation of x.
+        """
         pass
 
     @abstractmethod
     def derivative(self, x: float) -> float:
+        """
+        The derivative of the activation function.
+
+        :param x: the value to compute the derivative activation for.
+        :return: the derivative activation of x.
+        """
         pass
 
 
@@ -58,6 +77,9 @@ class ReLUActivation(Activation):
 
 
 class BaseNeuralNetwork(ABC):
+    """
+    An abstract base neural network.
+    """
 
     @abstractmethod
     def add_layer(self, size: int) -> None:
@@ -78,11 +100,10 @@ class BaseNeuralNetwork(ABC):
 
 
 def argmax(values: list[float]) -> int:
-    highest = values[0]
-    highest_index = 0
-    for i, value in enumerate(values):
-        if value > highest:
-            highest = value
-            highest_index = i
+    """
+    Find the index of the element with the largest value.
 
-    return highest_index
+    :param values: a list of values.
+    :return: the index as an integer.
+    """
+    return max(range(len(values)), key=lambda i: values[i])
